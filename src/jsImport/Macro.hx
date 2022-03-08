@@ -37,8 +37,10 @@ class Macro {
                 lines.push('import $id from "$v";');
               case [{ params: [macro $v{(v:String)}] }]:
                 lines.push('import { $id } from "$v";');
+              case [{ params: [macro $v{(v:String)}, macro $v{(exportName:String)}] }]:
+                lines.push('import { $exportName } from "$v";');
               case [{ pos: pos }]:
-                error('@$META requires a string parameter, optionally preceeded by an identifier', pos);
+                error('@$META requires a string parameter, optionally preceded by an identifier', pos);
               default:
                 error('Duplicate @$META', meta[0].pos);
             }
