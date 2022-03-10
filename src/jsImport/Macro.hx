@@ -30,7 +30,7 @@ class Macro {
             cl.meta.remove(':native');
             cl.meta.add(':native', [macro $v{id}], (macro null).pos);
 
-            var native = switch meta {
+            switch meta {
               case [{ params: [macro @star $v{(v:String)}] }]:
                 lines.push('import * as $id from "$v";');
               case [{ params: [macro @default $v{(v:String)}] }]:
