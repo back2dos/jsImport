@@ -30,7 +30,7 @@ class Macro {
             cl.meta.remove(':native');
             cl.meta.add(':native', [macro $v{id}], (macro null).pos);
 
-            switch meta {
+            var native = switch meta {
               case [{ params: [macro @star $v{(v:String)}] }]:
                 lines.push('import * as $id from "$v";');
               case [{ params: [macro @default $v{(v:String)}] }]:
@@ -38,7 +38,7 @@ class Macro {
               case [{ params: [macro $v{(v:String)}] }]:
                 lines.push('import { $id } from "$v";');
               case [{ params: [macro $v{(v:String)}, macro $v{(exportName:String)}] }]:
-                lines.push('import { $exportName } from "$v";');
+                lines.push('import { $exportName as $id } from "$v";');
               case [{ pos: pos }]:
                 error('@$META requires a string parameter, optionally preceded by an identifier', pos);
               default:
